@@ -20,3 +20,4 @@ cp ${code_dir}/config/nginx-roboshop.conf /etc/nginx/default.d/roboshop.com
 echo -e "\e[36mEnabling and Starting Nginx\e[0m"
 systemctl enable nginx 
 systemctl start nginx 
+
