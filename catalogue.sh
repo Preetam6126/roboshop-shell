@@ -40,7 +40,7 @@ print_head "Start catalogue service"
 systemctl start catalogue &>>${log_file}
 
 print_head "copy mongodb repo files"
-cp ${cod_dir}/config/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
+cp ${code_dir}/config/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
 
 print_head "install mongodb"
 yum install mongodb-org-shell -y &>>${log_file}
