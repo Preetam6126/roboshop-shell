@@ -17,11 +17,11 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${log_
 status_check $?
 
 print_head "Enable System services"
-systemctl enable redis 
+systemctl enable redis &>>${log_file}
 status_check $?
 
 print_head " Start redis system servcies"
-systemctl start redis 
+systemctl start redis &>>${log_file}
 status_check $?
 
 
