@@ -142,8 +142,8 @@ systemd_setup
 
 python() {
 
-print_head "Installing Pythong"
-yyum install python36 gcc python3-devel -y &>>${log_file}
+print_head "Installing Python"
+yum install python36 gcc python3-devel -y &>>${log_file}
 status_check $?
 
 app_prereq_setup
