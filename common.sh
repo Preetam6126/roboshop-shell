@@ -22,6 +22,8 @@ print_head "Copying service file to systemd "
 cp ${code_dir}/config/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
 status_check $?
 
+sed -i -e "s/ROBOSHOP_USER_PASSWORD/${roboshop_app_password}" /etc/systemd/system/${component}.service &>>${log_file}
+
 print_head "Systemctl reload"
 systemctl daemon-reload &>>${log_file}
 status_check $?
@@ -132,6 +134,23 @@ status_check $?
 
 #Schema Set-UP Function
 schema_setup
+
+#SystemD Set-Up Function
+systemd_setup
+
+}
+
+python() {
+
+print_head "Installing Pythong"
+yyum install python36 gcc python3-devel -y &>>${log_file}
+status_check $?
+
+app_prereq_setup
+
+print_head "Download Dependencies"
+pip3.6 install -r requirements.txt &>>${log_file} 
+status_check $?
 
 #SystemD Set-Up Function
 systemd_setup
