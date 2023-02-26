@@ -57,6 +57,7 @@ schema_setup() {
  print_head "Applying password to MySql password and Loading Schema"
  mysql -h mysql.devops36.shop -uroot -p${mysql_root_password} < /app/schema/shipping.sql &>>${log_file}
  status_check $?
+ fi
 }
 
 
