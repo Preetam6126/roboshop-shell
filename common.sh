@@ -16,6 +16,22 @@ status_check() {
  fi
  }    
  
+ schema_setup() {
+  if ["$(shema_type)" == "mongo" ]; then
+print_head "Copy mongodb repo files"
+cp ${code_dir}/config/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
+status_check $?
+
+print_head "Install mongodb client"
+yum install mongodb-org-shell -y &>>${log_file}
+status_check $?
+
+print_head "Load schema to mongodb"
+mongo --host mongodb.devops36.shop </app/schema/${component}.js &>>${log_file}
+status_check $?
+  fi
+ }
+ 
  NODEJS() {
   
 print_head "Downloading Repository"
@@ -75,16 +91,6 @@ print_head "Start ${component} service"
 systemctl start ${component} &>>${log_file}
 status_check $?
 
+schema_setup
 
-print_head "Copy mongodb repo files"
-cp ${code_dir}/config/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
-status_check $?
-
-print_head "Install mongodb"
-yum install mongodb-org-shell -y &>>${log_file}
-status_check $?
-
-print_head "Load schema to mongodb"
-mongo --host mongodb.devops36.shop </app/schema/${component}.js &>>${log_file}
-status_check $?
- }
+}
