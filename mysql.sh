@@ -27,11 +27,11 @@ systemctl start mysqld &>>${log_file}
 status_check $?
 
 print_head "Verifying password with SQL"
-echo show databases | mysql -uroot -pRoboShop@1 &>>${log_file}
+echo show databases | mysql -uroot -p${mysql_root_password} &>>${log_file}
 if [ $? -ne 0 ]; then
-status_check $?
 
 print_head "MySql default passwd changed"
 mysql_secure_installation --set-root-pass ${mysql_root_password} &>>${log_file}
+fi
 status_check $?
 
