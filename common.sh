@@ -48,7 +48,7 @@ schema_setup() {
  status_check $?
 
  print_head "Load schema to mongodb"
- mongo --host mongodb.devops36.shop </app/schema/${component}.js &>>${log_file}
+ mongo --host mongodb-dev.devops36.shop </app/schema/${component}.js &>>${log_file}
  status_check $?
  elif [ "${schema_type}" == "mysql" ]; then
  
@@ -57,7 +57,7 @@ schema_setup() {
  status_check $?
  
  print_head "Applying password to MySql password and Loading Schema"
- mysql -h mysql.devops36.shop -uroot -p${mysql_root_password} < /app/schema/shipping.sql &>>${log_file}
+ mysql -h mysql-dev.devops36.shop -uroot -p${mysql_root_password} < /app/schema/shipping.sql &>>${log_file}
  status_check $?
  fi
 }
